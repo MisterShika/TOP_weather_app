@@ -17,7 +17,9 @@ export default class WeatherItem{
 
         console.log(`Object with ${this.queryAPI} and ${this.locationQuery} has been created!`);
         console.log(this.fullQuery);
+
         this.getInitialData();
+        //this.getInitialData();
         //this.getNewDataTimer();
     }
 
@@ -38,37 +40,41 @@ export default class WeatherItem{
         this.currentConditions = conditions;
     }
 
-    async getNewData () {
-        const response = await fetch(this.fullQuery);
-        const data = await response.json();
-        return data;
-    }
-
     logTestData () {
         let readableTime = new Date(this.time * 1000);
         readableTime = readableTime.toLocaleString();
         console.log(`Weather for ${this.location} at ${readableTime} : ${this.currentTemp} and ${this.currentConditions}.`);
     }
 
-    getInitialData () {
-        this.getNewData()
-            .then(data => {
-                console.log(data.currentConditions.temp);
-                let location = data.resolvedAddress;
-                let currentTemp = data.currentConditions.temp;
-                let conditions = data.currentConditions.conditions;
-                    conditions = conditions.replace(/\s+/g, '-'); // Turns conditions from the API into css-usable text.
-                let sunrise = data.currentConditions.sunriseEpoch;
-                let sunset = data.currentConditions.sunsetEpoch;
-                let time = data.currentConditions.datetimeEpoch;
-                this.setInitialData(location, currentTemp, conditions, sunrise, sunset, time);
-                this.logTestData();
-            })
-            .catch(error => {
-                console.error('Error fetching weather data:', error);
-            });
+    async getNewData () {
+        const response = await fetch(this.fullQuery);
+        const data = await response.json();
+        return data;
     }
 
+    async getInitialData() {
+        try {
+            const data = await this.getNewData(); // Wait for data to be fetched
+            console.log(data.currentConditions.temp);
+            
+            let location = data.resolvedAddress;
+            let currentTemp = data.currentConditions.temp;
+            let conditions = data.currentConditions.conditions;
+            
+            // Turns conditions from the API into CSS-usable text
+            conditions = conditions.replace(/\s+/g, '-'); 
+            let sunrise = data.currentConditions.sunriseEpoch;
+            let sunset = data.currentConditions.sunsetEpoch;
+            let time = data.currentConditions.datetimeEpoch;
+    
+            // Set the initial data
+            this.setInitialData(location, currentTemp, conditions, sunrise, sunset, time);
+            this.logTestData();
+        } catch (error) {
+            console.error('Error fetching weather data:', error);
+        }
+    }
+    
     updateData () {
         this.getNewData()
         .then(data => {

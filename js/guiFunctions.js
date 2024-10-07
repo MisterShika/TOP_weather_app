@@ -11,7 +11,12 @@ export async function initDisplay (weatherObject, divID){
     const theWeather = weatherObject;
     await theWeather.getInitialData();
     newBox.innerHTML = theWeather.getTemp();
+
+    forecastBlock.classList = '';
+    forecastBlock.classList.add(theWeather.getTimeBackground()); 
+
     forecastBlock.appendChild(newBox);
+
 }
 
 export async function updateDisplay (weatherObject, divID) {
@@ -19,5 +24,6 @@ export async function updateDisplay (weatherObject, divID) {
     await theWeather.updateData();
     const weatherBox = document.getElementById(divID);
     weatherBox.innerHTML = theWeather.getTemp();
+    // console.log(theWeather.getTimeBackground());
     console.log(`New temperature ${theWeather.getTemp()}.`);
 }

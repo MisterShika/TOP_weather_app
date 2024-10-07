@@ -6,14 +6,18 @@ function createWeatherBox (divID) {
     return newDiv;
 }
 
-export function initDisplay (weatherObject, divID){
+export async function initDisplay (weatherObject, divID){
     const newBox = createWeatherBox(divID);
     const theWeather = weatherObject;
+    await theWeather.getInitialData();
     newBox.innerHTML = theWeather.getTemp();
     forecastBlock.appendChild(newBox);
 }
 
-export function updateDisplay (weatherObject, divID) {
-    const weather = weatherObject;
-    const weatherBlock = document.getElementById(divID);
+export async function updateDisplay (weatherObject, divID) {
+    const theWeather = weatherObject;
+    await theWeather.updateData();
+    const weatherBox = document.getElementById(divID);
+    weatherBox.innerHTML = theWeather.getTemp();
+    console.log(`New temperature ${theWeather.getTemp()}.`);
 }

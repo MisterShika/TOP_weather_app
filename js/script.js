@@ -1,5 +1,15 @@
 import WeatherItem from './weather.js';
 import {initDisplay, updateDisplay} from './guiFunctions.js';
 
-const itemOne = new WeatherItem('london');
-initDisplay(itemOne, 'test1');
+
+(async () => {
+    const itemOne = new WeatherItem('london');
+    // await itemOne.getInitialData();
+    initDisplay(itemOne, 'test1');
+    
+
+    setInterval(() => {
+        console.log('Interval fired');
+        updateDisplay(itemOne, 'test1');
+    }, 300000);
+})();

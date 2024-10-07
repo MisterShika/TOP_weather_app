@@ -18,7 +18,7 @@ export default class WeatherItem{
         console.log(`Object with ${this.queryAPI} and ${this.locationQuery} has been created!`);
         console.log(this.fullQuery);
 
-        this.getInitialData();
+        //this.getInitialData();
         //this.getInitialData();
         //this.getNewDataTimer();
     }
@@ -75,18 +75,29 @@ export default class WeatherItem{
         }
     }
     
-    updateData () {
-        this.getNewData()
-        .then(data => {
+    async updateData () {
+        // this.getNewData()
+        // .then(data => {
+        //     let currentTemp = data.currentConditions.temp;
+        //     let conditions = data.currentConditions.conditions;
+        //         conditions = conditions.replace(/\s+/g, '-'); 
+        //     this.updateTemp(currentTemp);
+        //     this.updateCurrentConditions(conditions);
+        // })
+        // .catch(error => {
+        //     console.error('Error fetching weather data:', error);
+        // });
+
+        try {
+            const data = await this.getNewData(); // Wait for data to be fetched
             let currentTemp = data.currentConditions.temp;
             let conditions = data.currentConditions.conditions;
                 conditions = conditions.replace(/\s+/g, '-'); 
             this.updateTemp(currentTemp);
             this.updateCurrentConditions(conditions);
-        })
-        .catch(error => {
+        } catch (error) {
             console.error('Error fetching weather data:', error);
-        });
+        }
     }
 
     getTemp () {

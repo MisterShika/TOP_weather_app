@@ -13,7 +13,7 @@ export async function initDisplay (weatherObject, divID){
     newBox.innerHTML = theWeather.getTemp();
 
     forecastBlock.classList = '';
-    forecastBlock.classList.add(theWeather.getTimeBackground()); 
+    forecastBlock.classList.add(theWeather.getBackground()); 
 
     forecastBlock.appendChild(newBox);
 

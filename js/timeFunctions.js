@@ -57,30 +57,28 @@ export function getTimeBackground (currentTime, sunrise, sunset) {
         timePercent = progressionCalc(currentTime, sunrise, sunset).toFixed(2);
         console.log(`Before Sunset. Test %: ${timePercent}`);
         return getBackgroundByPercent(timePercent, [
-            { max: 5, background: 'time7' },
-            { max: 15, background: 'time8' },
-            { max: 25, background: 'time9' },
-            { max: 35, background: 'time10' },
-            { max: 45, background: 'time11' },
-            { max: 93, background: 'time12' },
-            { max: 95, background: 'time13' },
-            { max: 97, background: 'time14' },
-            { max: 98, background: 'time15' },
-            { max: 99, background: 'time16' },
-            { max: 100, background: 'time17' }
+            { max: 5, background: 'time8' },
+            { max: 15, background: 'time9' },
+            { max: 25, background: 'time10' },
+            { max: 35, background: 'time11' },
+            { max: 45, background: 'time12' },
+            { max: 80, background: 'time13' },
+            { max: 84, background: 'time14' },
+            { max: 87, background: 'time15' },
+            { max: 92, background: 'time16' },
+            { max: 95, background: 'time17' },
+            { max: 100, background: 'time18' }
         ]);
     }
 
     if (currentTime > sunset) {
         timePercent = progressionCalc(currentTime, sunset, lastHour).toFixed(2);
-        console.log(`Before Sunset. Test %: ${timePercent}`);
+        console.log(`After Sunset. Test %: ${timePercent}`);
         return getBackgroundByPercent(timePercent, [
-            { max: 10, background: 'time17' },
-            { max: 20, background: 'time18' },
-            { max: 30, background: 'time19' },
-            { max: 40, background: 'time20' },
-            { max: 50, background: 'time21' },
-            { max: 60, background: 'time22' },
+            { max: 2, background: 'time19' },
+            { max: 3, background: 'time20' },
+            { max: 4, background: 'time21' },
+            { max: 5, background: 'time22' },
             { max: 100, background: 'time23' }
         ]);
     }

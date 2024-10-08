@@ -25,5 +25,7 @@ export async function updateDisplay (weatherObject, divID) {
     const weatherBox = document.getElementById(divID);
     weatherBox.innerHTML = theWeather.getTemp();
     // console.log(theWeather.getTimeBackground());
+    forecastBlock.classList = '';
+    forecastBlock.classList.add(theWeather.getBackground()); 
     console.log(`New temperature ${theWeather.getTemp()}.`);
 }

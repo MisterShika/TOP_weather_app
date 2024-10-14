@@ -3,7 +3,7 @@ import {initDisplay, updateDisplay} from './guiFunctions.js';
 
 
 (async () => {
-    const itemOne = new WeatherItem('tokyo');
+    const itemOne = new WeatherItem('sapporo');
     initDisplay(itemOne, 'test1');
     
     setInterval(() => {
@@ -12,12 +12,12 @@ import {initDisplay, updateDisplay} from './guiFunctions.js';
     }, 300000);
 })();
 
-// (async () => {
-//     const itemTwo = new WeatherItem('chicago');
-//     initDisplay(itemTwo, 'test2');
+(async () => {
+    const itemTwo = new WeatherItem('venice FL');
+    initDisplay(itemTwo, 'test2');
     
-//     setInterval(() => {
-//         console.log('Interval fired');
-//         updateDisplay(itemTwo, 'test2');
-//     }, 300000);
-// })();
+    setInterval(() => {
+        console.log('Interval fired');
+        updateDisplay(itemTwo, 'test2');
+    }, 300000);
+})();

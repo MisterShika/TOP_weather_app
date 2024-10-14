@@ -15,18 +15,26 @@ export default class WeatherItem{
         this.sunrise;
         this.sunset;
         this.currentTime;
+        this.timeZone;
 
         console.log(`Object with ${this.queryAPI} and ${this.locationQuery} has been created!`);
         console.log(this.fullQuery);
     }
 
-    setInitialData (location, currentTemp, conditions, sunrise, sunset, currentTime){
+    setInitialData (location, currentTemp, conditions, sunrise, sunset, currentTime, timeZone){
         this.location = location;
         this.currentTemp = currentTemp;
         this.currentConditions = conditions;
         this.sunrise = sunrise;
         this.sunset = sunset;
         this.currentTime = currentTime;
+        this.timeZone = timeZone;
+    }
+
+    updateTime (currentTime, sunrise, sunset) {
+        this.currentTime = currentTime;
+        this.sunrise = sunrise;
+        this.sunset = sunset;
     }
 
     updateTemp (currentTemp) {
@@ -56,16 +64,15 @@ export default class WeatherItem{
             
             let location = data.resolvedAddress;
             let currentTemp = data.currentConditions.temp;
-            let conditions = data.currentConditions.conditions;
+            let conditions = data.currentConditions.icon;
             
-            // Turns conditions from the API into CSS-usable text
-            conditions = conditions.replace(/\s+/g, '-'); 
             let sunrise = data.currentConditions.sunriseEpoch * 1000;
             let sunset = data.currentConditions.sunsetEpoch * 1000;
             let currentTime = data.currentConditions.datetimeEpoch * 1000;
+            let timeZone = data.timezone;
     
             // Set the initial data
-            this.setInitialData(location, currentTemp, conditions, sunrise, sunset, currentTime);
+            this.setInitialData(location, currentTemp, conditions, sunrise, sunset, currentTime, timeZone);
             this.logTestData();
         } catch (error) {
             console.error('Error fetching weather data:', error);
@@ -76,10 +83,13 @@ export default class WeatherItem{
         try {
             const data = await this.getNewData(); // Wait for data to be fetched
             let currentTemp = data.currentConditions.temp;
-            let conditions = data.currentConditions.conditions;
-                conditions = conditions.replace(/\s+/g, '-'); 
+            let conditions = data.currentConditions.icon;
+            let sunrise = data.currentConditions.sunriseEpoch * 1000;
+            let sunset = data.currentConditions.sunsetEpoch * 1000;
+            let currentTime = data.currentConditions.datetimeEpoch * 1000;
             this.updateTemp(currentTemp);
             this.updateCurrentConditions(conditions);
+            this.updateTime(currentTime, sunrise, sunset);
         } catch (error) {
             console.error('Error fetching weather data:', error);
         }
@@ -91,6 +101,14 @@ export default class WeatherItem{
 
     getTemp () {
         return this.currentTemp;
+    }
+
+    getLocation () {
+        return this.location;
+    }
+
+    getTimeZone () {
+        return this.timeZone;
     }
 
     getBackground () {

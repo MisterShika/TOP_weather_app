@@ -31,12 +31,12 @@ export function getTimeBackground (currentTime, sunrise, sunset) {
     const firstHour = getFirstHour(currentTime);
     const lastHour = getLastHour(currentTime);
     
-    console.log(`Time: ${currentTime}`);
-    console.log(`Sunrise: ${sunrise}`);
-    console.log(`Sunset: ${sunset}`);
+    // console.log(`Time: ${currentTime}`);
+    // console.log(`Sunrise: ${sunrise}`);
+    // console.log(`Sunset: ${sunset}`);
 
-    console.log(`Midnight Unix: ${firstHour}`);
-    console.log(`Next Unix: ${lastHour}`);
+    // console.log(`Midnight Unix: ${firstHour}`);
+    // console.log(`Next Unix: ${lastHour}`);
 
     if (currentTime < sunrise) {
         timePercent = progressionCalc(currentTime, firstHour, sunrise).toFixed(2);

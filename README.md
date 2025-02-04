@@ -1,6 +1,6 @@
 # Weather Compare
 
-https://www.visualcrossing.com/
+![Screenshot](./screenshot.jpg)
 
 Weather compare is an application to see and compare the time and weather between two separate locations. The weather, time, and associated graphics are updated periodically throughout the course of the day even as the window remains open.
 
